@@ -1,9 +1,9 @@
-<h2>Музыкальный бот SinusBot</h2>
+<h2>Musical bot SinusBot</h2>
 
-<p>SinusBot - многофункциональный радио бот для сервера Teamspeak 3 сервера</p>
+<p>SinusBot - multifunction radio bot for Teamspeak 3 servers</p>
 
 <div class="alert alert-info">
-  Для настройки SinusBot используйте данные предоставленные ниже
+  For SinusBot settings using the data provided below
 </div>
 
 <h3>{$LANG.clientareaproductdetails}</h3>
@@ -100,19 +100,19 @@
     </div>
     <div class="col-sm-7">
         
-            <span style="padding:2px 10px;background-color:#5bb75b;color:#fff;font-weight:bold;">Активный</span>
+            <span style="padding:2px 10px;background-color:#5bb75b;color:#fff;font-weight:bold;">Active</span>
     </div>
 </div>
 {/if}
 
 <hr>
-<h3>Данные для доступа к панели управления</h3>
+<h3>Data for access to the control panel</h3>
 
 <hr>
 {if $status eq "Активный"} 
 <div class="row">
     <div class="col-sm-5">
-       Ссылка на панель управления:
+       A link to the control panel:
     </div>
     <div class="col-sm-7">
         <a href="{$domain}"> {$domain}</a>
@@ -120,7 +120,7 @@
 </div>
 <div class="row">
     <div class="col-sm-5">
-       Логин:
+       Login:
     </div>
     <div class="col-sm-7">
          {$username}
@@ -129,7 +129,7 @@
     
     <div class="row">
     <div class="col-sm-5">
-       Пароль:
+       Password:
     </div>
     <div class="col-sm-7">
       {$password}
@@ -137,16 +137,16 @@
 </div> 
 {elseif $status eq "Удален"} 
     <span style="padding:2px 10px;background-color:#cc0000;color:#fff;text-align: center;display: block;margin: 0 auto;width: 149px;height: 100%;">
-        <strong>услуга удалена</strong>
+        <strong>service deleted</strong>
     </span> {/if}
     {if $status eq "Приостановлен"} 
          <span style="padding:2px 10px;background-color:#cc0000;color:#fff;text-align: center;display: block;margin: 0 auto;width: 400px;height: 100%;">
-        <strong>услуга заблокирована</strong><br/>
+        <strong>service suspended</strong><br/>
      <strong>   {$LANG.suspendreason}: {$suspendreason}</strong>
     </span> {/if}
 <br><br>
 <hr>
-<h3>Лог бота</h3>
+<h3>log bot</h3>
 <hr>
 
 
