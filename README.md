@@ -1,22 +1,22 @@
 # whmcs6.3.0-SinusBot-docker
-Модуль для whmcs для интеграции биллинга с shipyard и автоматической выдачи sinusbot клиенту
+Whmcs module for integration with billing and automatic dispensing shipyard sinusbot client
 
-Скриншот добавленного сервера (Настройки->продукты и услуги->сервера)
+Screenshot Adding Servers (Settings-> Products and services-> Server)
 ![Alt text](https://github.com/07artem132/whmcs6.3.0-SinusBot-docker/blob/master/screenshots/servers.png)
 
-Скриншот настроек модуля (Настройки->продукты и услуги->услуга->настройки модуля)
+Screenshot module settings (Settings-> Products and services-> usluga-> module configuration)
 ![Alt text](https://github.com/07artem132/whmcs6.3.0-SinusBot-docker/blob/master/screenshots/product.png)
 
-Скриншот продукта с панели администратора
+Product Screenshot from admin panel
 ![Alt text](https://github.com/07artem132/whmcs6.3.0-SinusBot-docker/blob/master/screenshots/admin.png)
 
-Скриншот продукта из панели клиента
+Screenshot of the product from the customer panel
 ![Alt text](https://github.com/07artem132/whmcs6.3.0-SinusBot-docker/blob/master/screenshots/client.png)
 
 ---------
 email: a_ivanko@service-voice.com
-Возможна любая дороботка/костомизация модуля под Ваши требования за отдельную плату.
-Данный модуль тестировался только на whmcs  версии 6.3.0
+Can any dorobotki / kostomizatsiya module to your requirements for a fee.
+This module has been tested only on whmcs version 6.3.0
 
-Данный модуль распростроняется по лицензии:   [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+This module rasprostronyaetsya licenses:   [Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
