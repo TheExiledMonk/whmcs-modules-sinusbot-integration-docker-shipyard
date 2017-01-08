@@ -8,7 +8,7 @@ if (!defined("WHMCS")) {
 require_once(__DIR__ . '/lib/shipyard.php');
 
 /**
- * Основные данные о модуле
+ * Basic data about the module
  *
  *
  *
@@ -26,10 +26,10 @@ function sinusdocker_MetaData() {
 }
 
 /**
- * Дополнительные поля для конфигурации продукта
+ * Additional fields for product configuration
  *
  *
- * Максимум 24 параметра, поддерживаются следующие типы:
+ * Maximum 24 parameter supports the following types:
  * * text
  * * password
  * * yesno
@@ -47,29 +47,29 @@ function sinusdocker_ConfigOptions() {
             'Type' => 'text',
             'Size' => '120',
             'Default' => 'images docker sinusbot',
-            'Description' => '<br>Максимум 120 символов',
+            'Description' => '<br>A maximum of 120 characters',
         ), 'HTTP proto' => array(
             'Type' => 'dropdown',
             'Options' => array(
                 'http' => 'http',
                 'https' => 'https',
             ),
-            'Description' => '<br>Выбирайте HTTPS если вы используете SSL сертификат для бота',
+            'Description' => '<br>Choose HTTPS if you use an SSL certificate for bot',
         ), 'Префикс контейнера' => array(
             'Type' => 'text',
             'Size' => '30',
             'Default' => 'billing_',
-            'Description' => 'По умолчанию контейнеры будут иметь имя: billing_ID услуги',
+            'Description' => 'Default containers will have a name: billing_ID services',
         ), 'Задержка' => array(
             'Type' => 'text',
             'Size' => '1',
             'Default' => '1',
-            'Description' => 'По умолчанию после запуска контейнера скрипт будет ждать 1 секунду перед тем как будет извлекать пароль (это необходимо потому как бот стартует дольше чем выполняется php скрипт)',
+            'Description' => 'By default, after the launch of the container script will wait 1 second before it will be to extract the password (this is necessary because the bot will start longer than executed php script)',
     ));
 }
 
 /**
- * Действия при создании нового экземляра услуги/продукта
+ * Actions to create an instance of the new service / product
  *
 
  *
@@ -92,30 +92,30 @@ function sinusdocker_CreateAccount(array $params) {
 
         $shipyard = new shipyard();
 
-        //  получаем токен
+        //  we get token
         $token = $shipyard->autn($serverusername, $serverpassword, $url);
 
-        // создаем контейнер
+        // create a container
         $idcontainer = $shipyard->containerscreate($serviceid, $template, $serverusername, $token, $url, $prefix);
 
-        //запускаем контейнер
+        //run container
         $shipyard->containersrestart($idcontainer, $serverusername, $token, $url);
         sleep($pause);
-        //получаем лог для извлечения пароля 
+        //to receive a password for log retrieval
         $rawdata = $shipyard->containerslogs($idcontainer, $serverusername, $token, $url);
 
-        //Получаем пароль из лога
+        //Get the password from the log
         preg_match($repasswd, $rawdata, $matches); // passwd sinusbot:  $matches[1]
-        // получаем информацию о контейнере
+        // We obtain information about the container
         $data = $shipyard->containersjson($idcontainer, $serverusername, $token, $url);
 
-        // здесь магический костыль так как здесь есть название класса 8087/tcp
-        // мы преобразуем обьект в масив
+        // Here magic crutch offering a class name 8087 / tcp
+        // we transform the object into an array
         $data = get_object_vars($data->NetworkSettings->Ports);
         $HostPort = $data['8087/tcp']['0']->HostPort;
 
 
-        // обновляем информацию
+        // We update the information
         $command = "updateclientproduct";
         $values["serviceid"] = $params['serviceid'];
         $values["serviceusername"] = 'admin';
@@ -137,7 +137,7 @@ function sinusdocker_CreateAccount(array $params) {
 }
 
 /**
- * Приостановка продукта/услуги
+ * Suspension of a product / service
  *
  *
  * @param array $params common module parameters
@@ -152,10 +152,10 @@ function sinusdocker_SuspendAccount(array $params) {
 
         $shipyard = new shipyard();
 
-        //  получаем токен
+        //  we get token
         $token = $shipyard->autn($params['serverusername'], $params['serverpassword'], $url);
 
-        // Останавливаем контейнер
+        // stop the container
         $shipyard->containersstop($params['customfields']['id container'], $params['serverusername'], $token, $url);
     } catch (Exception $e) {
         // Record the error in WHMCS's module log.
@@ -189,22 +189,22 @@ function sinusdocker_UnsuspendAccount(array $params) {
 
         $shipyard = new shipyard();
 
-        //  получаем токен
+        //  we get token
         $token = $shipyard->autn($params['serverusername'], $params['serverpassword'], $url);
 
-        //запускаем контейнер
+        //run container
         $shipyard->containersrestart($params['customfields']['id container'], $params['serverusername'], $token, $url);
 
-        // получаем информацию о контейнере
+        // We obtain information about the container
         $data = $shipyard->containersjson($params['customfields']['id container'], $params['serverusername'], $token, $url);
 
-        // здесь магический костыль так как здесь есть название класса 8087/tcp
-        // мы преобразуем обьект в масив
+        // Here magic crutch offering a class name 8087 / tcp
+        // we transform the object into an array
         $data = get_object_vars($data->NetworkSettings->Ports);
         $HostPort = $data['8087/tcp']['0']->HostPort;
 
 
-        // обновляем информацию
+        // We update the information
         $command = "updateclientproduct";
         $values["serviceid"] = $params['serviceid'];
         $values["domain"] = $params['configoption2'] . '://' . $params['serverhostname'] . ':' . $HostPort . '/';
@@ -242,10 +242,10 @@ function sinusdocker_TerminateAccount(array $params) {
 
         $shipyard = new shipyard();
 
-        //  получаем токен
+        //  We get token
         $token = $shipyard->autn($params['serverusername'], $params['serverpassword'], $url);
 
-        // удаляем
+        // remove
         $shipyard->containersdelete($params['customfields']['id container'], $params['serverusername'], $token, $url);
     } catch (Exception $e) {
         // Record the error in WHMCS's module log.
@@ -260,7 +260,7 @@ function sinusdocker_TerminateAccount(array $params) {
 }
 
 /**
- * Проверка соединения с сервером.
+ * Checking the connection to the server.
  *
  * @param array $params common module parameters
  *
@@ -341,11 +341,11 @@ function sinusdocker_ClientArea(array $params) {
 
         $shipyard = new shipyard();
 
-        //  получаем токен
+        //  We get token
         $token = $shipyard->autn($serverusername, $serverpassword, $url);
 
 
-        //получаем лог для извлечения пароля 
+        //to receive a password for log retrieval
         $logs = $shipyard->containerslogs($params['customfields']['id container'], $serverusername, $token, $url);
         return array(
             'tabOverviewReplacementTemplate' => $templateFile,
